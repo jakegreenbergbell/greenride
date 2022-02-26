@@ -34,3 +34,8 @@ https://github.com/Zenigma/emission_tracker_treehacks
 
 - Took data file `carData.js` from this repo
 - Data file originally from the same epa sources listed above
+
+https://stackoverflow.com/questions/55424790/how-i-draw-a-route-with-react-google-maps-component
+
+- `MapDirectionsRenderer` component source code from here
+    - Transformed this component into a functional component so we could use `useEffect` and force a re-render every time the longitude or latitude of source or destination changed
