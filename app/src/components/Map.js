@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleMap, useLoadScript, DirectionsRenderer } from "@react-google-maps/api";
 
 import usePlacesAutocomplete, {
@@ -32,22 +32,20 @@ export default function Map() {
     libraries,
   });
 
-  let [fromLat, setFromLat] = useState("");
-  let [fromLong, setFromLong] = useState("");
-  let [toLat, setToLat] = useState("");
-  let [toLong, setToLong] = useState("");
-
-  const handleFromLat = (val) => {
-    setFromLat(val);
-    console.log(val);
-  }
+  let [fromLat, setFromLat] = useState(34.0522342);
+  let [fromLong, setFromLong] = useState(-118.2436849);
+  let [toLat, setToLat] = useState(37.3382082);
+  let [toLong, setToLong] = useState(-121.8863286);
 
   const placesLol = [
     { latitude: 34.0522342, longitude: -118.2436849 },
     { latitude: 37.3382082, longitude: -121.8863286 },
   ]
 
-
+  const handleFromLat = (val) => {
+    setFromLat(val);
+    console.log(val);
+  }
 
   const handleFromLong = (val) => {
     setFromLong(val);
@@ -66,11 +64,11 @@ export default function Map() {
 
   if (loadError) return "Load error";
   if (!isLoaded) return "Loading";
+
   return (
     <div className="container w-full h-full">
-
       <LocationSearch text="From" receiveLat={handleFromLat} receiveLong={handleFromLong} />
-      <LocationSearch text="To" receiveLat={handleToLat} receiveLong={handleToLong} />
+      <LocationSearch text={"To"} receiveLat={handleToLat} receiveLong={handleToLong} />
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -78,27 +76,25 @@ export default function Map() {
         center={center}
       >
         <MapDirectionsRenderer
-          places={[{latitude: Number(fromLat), longitude: Number(fromLong)}, {latitude: Number(toLat), longitude: Number(toLong)}]}
+          places={[
+            { latitude: fromLat, longitude: fromLong },
+            { latitude: toLat, longitude: toLong },
+          ]}
           travelMode={window.google.maps.TravelMode.DRIVING}
         />
       </GoogleMap>
-
-
-
 
     </div>
   );
 }
 
 
-class MapDirectionsRenderer extends React.Component {
-  state = {
-    directions: null,
-    error: null
-  };
+function MapDirectionsRenderer(props) {
+  let [directions, setDirections] = useState();
+  let [error, setError] = useState();
 
-  componentDidMount() {
-    const { places, travelMode } = this.props;
+  useEffect(() => {
+    const { places, travelMode } = props;
 
     const waypoints = places.map(p => ({
       location: { lat: p.latitude, lng: p.longitude },
@@ -106,8 +102,6 @@ class MapDirectionsRenderer extends React.Component {
     }))
     const origin = waypoints.shift().location;
     const destination = waypoints.pop().location;
-
-
 
     const directionsService = new window.google.maps.DirectionsService();
     directionsService.route(
@@ -119,29 +113,18 @@ class MapDirectionsRenderer extends React.Component {
       },
       (result, status) => {
         if (status === window.google.maps.DirectionsStatus.OK) {
-          this.setState({
-            directions: result
-          });
+          setDirections(result);
         } else {
-          this.setState({ error: result });
+          setError(result);
         }
       }
     );
-  }
+  });
 
-  render() {
-    if (this.state.error) {
-      return <h1>{this.state.error}</h1>;
-    }
-    return <DirectionsRenderer directions={this.state.directions} />;
-  }
+  return (
+    <DirectionsRenderer directions={directions} />
+  );
 }
-
-
-
-
-
-
 
 function LocationSearch(props) {
   const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete();
