@@ -145,7 +145,7 @@ function CarInfoForm() {
           Car make:
           <br />
           <select
-            className="bg-blue-300 text-xl rounded-lg w-full p-1"
+            className="bg-green-300 text-xl rounded-lg w-full p-1"
             value={make}
             onChange={changeMake}
           >
@@ -163,7 +163,7 @@ function CarInfoForm() {
           Car model:
           <br />
           <select
-            className="bg-blue-300 text-xl rounded-lg w-full p-1"
+            className="bg-green-300 text-xl rounded-lg w-full p-1"
             value={model}
             onChange={changeModel}
           >
@@ -181,7 +181,7 @@ function CarInfoForm() {
           Car year:
           <br />
           <select
-            className="bg-blue-300 text-xl rounded-lg w-full p-1"
+            className="bg-green-300 text-xl rounded-lg w-full p-1"
             value={year}
             onChange={changeYear}
           >
