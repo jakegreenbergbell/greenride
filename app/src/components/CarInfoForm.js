@@ -4,7 +4,8 @@ import carData from '../data/carData'
 function CarInfoForm() {
 
   let [make, setMake] = useState("ACURA"); // By default, the select item will start on ACURA since that's alphabetically first
-  let [availableModels, setAvailableModels] = useState(["Select Car Make"]);
+  let [model, setModel] = useState("ILX"); // Actual model selected
+  let [availableModels, setAvailableModels] = useState(["Select Car Make"]); // List of available models based on selected car make
 
   useEffect(() => {
     updateModels(make); // Page starts with car make ACURA
@@ -24,7 +25,11 @@ function CarInfoForm() {
   const changeMake = (e) => {
     let { name, value } = e.target;
     setMake(value);
-    console.log(value);
+  }
+
+  const changeModel = (e) => {
+    let { name, value } = e.target;
+    setModel(value);
   }
 
   // Update list of available models for the selected car make
@@ -32,7 +37,7 @@ function CarInfoForm() {
     const carModels = new Set();
     for (const year in carData) {
       for (const car in carData[year]) {
-        if(carData[year][car]["Represented Test Veh Make"] === value){
+        if (carData[year][car]["Represented Test Veh Make"] === value) {
           carModels.add(carData[year][car]["Represented Test Veh Model"]);
         }
       }
@@ -51,7 +56,7 @@ function CarInfoForm() {
         </label>
         <label>
           Car Model:
-          <select name="model">
+          <select name="model" onChange={changeModel}>
             {availableModels.map((model, ind) => { return <option value={model}>{model}</option> })}
           </select>
         </label>
