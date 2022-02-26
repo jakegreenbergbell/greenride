@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { GoogleMap, useLoadScript, DirectionsRenderer } from "@react-google-maps/api";
+import "./Map.css"
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -47,6 +48,11 @@ export default function Map() {
     { latitude: 37.3382082, longitude: -121.8863286 },
   ]
 
+  let placesLol2 = [
+    { latitude: Number(fromLat), longitude: Number(fromLong) },
+    { latitude: Number(toLat), longitude: Number(toLong) },
+  ]
+
 
 
   const handleFromLong = (val) => {
@@ -66,6 +72,28 @@ export default function Map() {
 
   if (loadError) return "Load error";
   if (!isLoaded) return "Loading";
+
+  console.log(placesLol)
+  console.log(placesLol2)
+  
+  if(fromLat == 0 || toLat == 0){
+    return(
+        <div className="container w-full h-full" id="container">
+          <div id="locationBoxFrom" className="locationBox">
+            <LocationSearch id="test" text="From" receiveLat={handleFromLat} receiveLong={handleFromLong} />
+          </div>
+          <div id="locationBoxTo" className="locationBox">
+            <LocationSearch text="To" receiveLat={handleToLat} receiveLong={handleToLong} />
+          </div>
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          zoom={8}
+          center={center}
+        >
+        </GoogleMap>
+      </div>
+    )
+  }
   return (
     <div className="container w-full h-full">
 
@@ -78,7 +106,11 @@ export default function Map() {
         center={center}
       >
         <MapDirectionsRenderer
-          places={[{latitude: Number(fromLat), longitude: Number(fromLong)}, {latitude: Number(toLat), longitude: Number(toLong)}]}
+          // places={[
+          //   {latitude: Number(fromLat), longitude: Number(fromLong)}, 
+          //   {latitude: Number(toLat), longitude: Number(toLong)}
+          // ]}
+          places={placesLol2}
           travelMode={window.google.maps.TravelMode.DRIVING}
         />
       </GoogleMap>
