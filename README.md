@@ -25,3 +25,7 @@ https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-veh
 - Has some stats on CO2 released per gallon of gasoline
 - Can use as a starting point for customization of output based on car type
 - Has info on other types of vehicle emissions
+
+https://www.epa.gov/compliance-and-fuel-economy-data/data-cars-used-testing-fuel-economy
+
+- Has stats on grams of CO2 per gallon of a bunch of different cars
