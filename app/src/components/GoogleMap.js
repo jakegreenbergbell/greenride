@@ -13,7 +13,7 @@ const center = {
 
 export default function Map(){
   const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: "AIzaSyAqhG7ACvDyaxkpvSSowGOgtfWuJqnZjzE"
+    googleMapsApiKey: process.env.local.REACT_APP_GOOGLE_MAPS_API_KEY
   })
 
   if(loadError) return "Load error"
