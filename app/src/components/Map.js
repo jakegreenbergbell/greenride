@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, DirectionsRenderer } from "@react-google-maps/api";
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -42,6 +42,13 @@ export default function Map() {
     console.log(val);
   }
 
+  const placesLol = [
+    { latitude: 34.0522342, longitude: -118.2436849 },
+    { latitude: 37.3382082, longitude: -121.8863286 },
+  ]
+
+
+
   const handleFromLong = (val) => {
     setFromLong(val);
     console.log(val);
@@ -62,17 +69,79 @@ export default function Map() {
   return (
     <div className="container w-full h-full">
 
-      <LocationSearch text="From" receiveLat={handleFromLat} receiveLong={handleFromLong}/>
-      <LocationSearch text="To" receiveLat={handleToLat} receiveLong={handleToLong}/>
+      <LocationSearch text="From" receiveLat={handleFromLat} receiveLong={handleFromLong} />
+      <LocationSearch text="To" receiveLat={handleToLat} receiveLong={handleToLong} />
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
         center={center}
-      ></GoogleMap>
+      >
+        <MapDirectionsRenderer
+          places={[{latitude: Number(fromLat), longitude: Number(fromLong)}, {latitude: Number(toLat), longitude: Number(toLong)}]}
+          travelMode={window.google.maps.TravelMode.DRIVING}
+        />
+      </GoogleMap>
+
+
+
+
     </div>
   );
 }
+
+
+class MapDirectionsRenderer extends React.Component {
+  state = {
+    directions: null,
+    error: null
+  };
+
+  componentDidMount() {
+    const { places, travelMode } = this.props;
+
+    const waypoints = places.map(p => ({
+      location: { lat: p.latitude, lng: p.longitude },
+      stopover: true
+    }))
+    const origin = waypoints.shift().location;
+    const destination = waypoints.pop().location;
+
+
+
+    const directionsService = new window.google.maps.DirectionsService();
+    directionsService.route(
+      {
+        origin: origin,
+        destination: destination,
+        travelMode: travelMode,
+        waypoints: waypoints
+      },
+      (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          this.setState({
+            directions: result
+          });
+        } else {
+          this.setState({ error: result });
+        }
+      }
+    );
+  }
+
+  render() {
+    if (this.state.error) {
+      return <h1>{this.state.error}</h1>;
+    }
+    return <DirectionsRenderer directions={this.state.directions} />;
+  }
+}
+
+
+
+
+
+
 
 function LocationSearch(props) {
   const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete();
