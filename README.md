@@ -29,3 +29,8 @@ https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-veh
 https://www.epa.gov/compliance-and-fuel-economy-data/data-cars-used-testing-fuel-economy
 
 - Has stats on grams of CO2 per gallon of a bunch of different cars
+
+https://github.com/Zenigma/emission_tracker_treehacks
+
+- Took data file `carData.js` from this repo
+- Data file originally from the same epa sources listed above
