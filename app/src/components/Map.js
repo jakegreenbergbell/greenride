@@ -13,6 +13,7 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css"
+import "./Map.css"
 
 const libraries = ["places"]
 
@@ -66,10 +67,13 @@ export default function Map() {
   if (!isLoaded) return "Loading";
 
   return (
-    <div className="container w-full h-full">
-      <LocationSearch text="From" receiveLat={handleFromLat} receiveLong={handleFromLong} />
-      <LocationSearch text={"To"} receiveLat={handleToLat} receiveLong={handleToLong} />
-
+    <div className="container w-full h-full" id="container">
+      <div id="locationBoxFrom" className="locationBox">
+        <LocationSearch text="From" receiveLat={handleFromLat} receiveLong={handleFromLong} />
+      </div>
+      <div id="locationBoxTo" className="locationBox">
+        <LocationSearch text={"To"} receiveLat={handleToLat} receiveLong={handleToLong} />
+      </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
@@ -83,8 +87,9 @@ export default function Map() {
           travelMode={window.google.maps.TravelMode.DRIVING}
         />
       </GoogleMap>
-
     </div>
+
+
   );
 }
 
