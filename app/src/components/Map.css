@@ -1,0 +1,40 @@
+#container{
+    position:relative;
+}
+
+#locationBoxFrom{
+    position: absolute;;
+    z-index:3;
+    top: 10px;
+    left: 35%;
+    border-radius: 10px;
+
+}
+
+#locationBoxTo{
+    position: absolute;;
+    z-index:2;
+    top: 10px;
+    left: 55%;
+    border-radius: 10px;
+
+}
+
+input{
+    border-radius: 5px;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+}
+
+input:hover{
+    background-color: rgb(235, 235, 235);
+}
+
+.locationBox{
+    border-radius: 10px;
+}
+
+#test{
+    border-radius: 10px;
+}
