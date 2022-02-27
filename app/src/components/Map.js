@@ -33,10 +33,10 @@ export default function Map() {
     libraries,
   });
 
-  let [fromLat, setFromLat] = useState(34.0522342);
-  let [fromLong, setFromLong] = useState(-118.2436849);
-  let [toLat, setToLat] = useState(37.3382082);
-  let [toLong, setToLong] = useState(-121.8863286);
+  let [fromLat, setFromLat] = useState(34.068920);
+  let [fromLong, setFromLong] = useState(-118.445183);
+  let [toLat, setToLat] = useState(34.036980);
+  let [toLong, setToLong] = useState(-118.676491);
 
   const placesLol = [
     { latitude: 34.0522342, longitude: -118.2436849 },
@@ -78,6 +78,9 @@ export default function Map() {
         mapContainerStyle={mapContainerStyle}
         zoom={8}
         center={center}
+        mapTypeId='hybrid'
+        clickableIcons={true}
+        tilt="45"
       >
         <MapDirectionsRenderer
           places={[

@@ -22,6 +22,8 @@ We want to make it easy for each individual to see how their daily commute affec
 
 https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle#:~:text=typical%20passenger%20vehicle%3F-,A%20typical%20passenger%20vehicle%20emits%20about%204.6%20metric%20tons%20of,8%2C887%20grams%20of%20CO2.
 
+https://www.inspirecleanenergy.com/blog/clean-energy-101/average-american-carbon-footprint
+
 - Has some stats on CO2 released per gallon of gasoline
 - Can use as a starting point for customization of output based on car type
 - Has info on other types of vehicle emissions
