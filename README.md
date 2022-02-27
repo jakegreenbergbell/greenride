@@ -41,3 +41,7 @@ https://stackoverflow.com/questions/55424790/how-i-draw-a-route-with-react-googl
 
 - `MapDirectionsRenderer` component source code from here
     - Transformed this component into a functional component so we could use `useEffect` and force a re-render every time the longitude or latitude of source or destination changed
+
+https://stackoverflow.com/questions/3251609/how-to-get-total-driving-distance-with-google-maps-api-v3
+
+- For driving distance and duration extraction
