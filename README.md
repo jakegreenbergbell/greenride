@@ -1,6 +1,6 @@
 # GreenRide
 
-There's nothing better than [trying GreenRide](https://jakegreenbergbell.github.io/greenride/) yourself!
+There's nothing better than [trying GreenRide](https://jakegreenbergbell.github.io/greenride/) yourself! Please note that you may have to disable ad blockers or try GreenRide in incognito mode with extensions disabled for locations to work properly.
 
 [Hack on the Hill 2022](https://devpost.com/software/greenride?ref_content=my-projects-tab&ref_feature=my_projects).
 
