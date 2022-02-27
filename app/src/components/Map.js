@@ -142,6 +142,7 @@ function LocationSearch(props) {
           const { lat, lng } = await getLatLng(results[0]);
           props.receiveLat(lat);
           props.receiveLong(lng);
+          setValue(address);
         } catch (error) {
           console.log("error!");
         }
