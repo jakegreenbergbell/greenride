@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import carData from "../data/carData";
+import { InfoContext } from "../InfoProvider";
 
 function CarInfoForm() {
   const [make, setMake] = useState("");
@@ -11,6 +12,9 @@ function CarInfoForm() {
   const [CO2PerMile, setCO2PerMile] = useState(-1);
 
   const carMakeSet = new Set();
+
+  const { totalDistance, setTotalDistance, totalDuration, setTotalDuration } =
+    useContext(InfoContext);
 
   // Initialize the available makes at the beginning
   useEffect(() => {
@@ -197,7 +201,21 @@ function CarInfoForm() {
         <br />
       </form>
       <div className="mt-4 w-full flex justify-center text-lg">
-        <div>Grams C02/mile: {CO2PerMile}</div>
+        <div className="flex-col">
+          <div>
+            Car's CO2 emissions: {Math.round(CO2PerMile / 10) / 100} kg CO2 per
+            mile
+          </div>
+          <div>Total distance: {parseInt(totalDistance)} miles</div>
+          <div>
+            Total emissions:{" "}
+            {Math.round(
+              (parseInt(totalDistance.split(" ")[0]) * CO2PerMile) / 10
+            ) / 100}{" "}
+            kg of CO2
+          </div>
+          <div>Total duration: {totalDuration}</div>
+        </div>
       </div>
     </div>
   );
