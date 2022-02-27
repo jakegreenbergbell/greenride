@@ -45,3 +45,7 @@ https://stackoverflow.com/questions/55424790/how-i-draw-a-route-with-react-googl
 https://stackoverflow.com/questions/3251609/how-to-get-total-driving-distance-with-google-maps-api-v3
 
 - For driving distance and duration extraction
+
+https://stackoverflow.com/questions/54069253/usestate-set-method-not-reflecting-change-immediately
+
+- A lesson well learned on React state updates
