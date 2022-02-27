@@ -2,7 +2,7 @@
 
 There's nothing better than [trying GreenRide](https://jakegreenbergbell.github.io/greenride/) yourself!
 
-Hack on the Hill 2022.
+[Hack on the Hill 2022](https://devpost.com/software/greenride?ref_content=my-projects-tab&ref_feature=my_projects).
 
 ## Our Vision
 
