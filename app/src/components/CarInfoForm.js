@@ -213,7 +213,8 @@ function CarInfoForm() {
             className="bg-green-300 text-xl rounded-lg w-full p-1 border-none hover:bg-green-300"
             value={passengers}
             onChange={changePassengers}
-            type="text"
+            type="number"
+            min="1"
           />
         </label>
         <br />
