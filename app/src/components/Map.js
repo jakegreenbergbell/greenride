@@ -119,6 +119,16 @@ function MapDirectionsRenderer(props) {
       (result, status) => {
         if (status === window.google.maps.DirectionsStatus.OK) {
           setDirections(result);
+
+          let totalDistance = 0;
+          let totalDuration = 0;
+          let legs = result.routes[0].legs;
+
+          for (let i = 0; i < legs.length; i++) {
+            totalDistance += legs[i].distance.value;
+            totalDuration += legs[i].duration.value;
+          }
+
         } else {
           setError(result);
         }
