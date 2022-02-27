@@ -202,19 +202,20 @@ function CarInfoForm() {
       </form>
       <div className="mt-4 w-full flex justify-center text-lg">
         <div className="flex-col">
-          <div>
-            Car's CO2 emissions: {Math.round(CO2PerMile / 10) / 100} kg CO2 per
-            mile
+          <div className="my-2">
+            {Math.round(CO2PerMile / 10) / 100} kg CO2 per mile
           </div>
-          <div>Total distance: {parseInt(totalDistance)} miles</div>
-          <div>
+          <div className="my-2">
+            Total distance: {parseInt(totalDistance)} miles
+          </div>
+          <div className="my-2">
             Total emissions:{" "}
             {Math.round(
               (parseInt(totalDistance.split(" ")[0]) * CO2PerMile) / 10
             ) / 100}{" "}
-            kg of CO2
+            kg CO2
           </div>
-          <div>Total duration: {totalDuration}</div>
+          <div className="my-2">Total duration: {totalDuration}</div>
         </div>
       </div>
     </div>
