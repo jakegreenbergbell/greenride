@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { GoogleMap, useLoadScript, DirectionsRenderer } from "@react-google-maps/api";
+import React, { useState, useEffect, useContext } from "react";
+import {
+  GoogleMap,
+  useLoadScript,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -12,10 +16,11 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
-import "@reach/combobox/styles.css"
-import "./Map.css"
+import "@reach/combobox/styles.css";
+import "./Map.css";
+import { InfoContext } from "../InfoProvider";
 
-const libraries = ["places"]
+const libraries = ["places"];
 
 const mapContainerStyle = {
   width: "100%",
@@ -41,27 +46,27 @@ export default function Map() {
   const placesLol = [
     { latitude: 34.0522342, longitude: -118.2436849 },
     { latitude: 37.3382082, longitude: -121.8863286 },
-  ]
+  ];
 
   const handleFromLat = (val) => {
     setFromLat(val);
     console.log(val);
-  }
+  };
 
   const handleFromLong = (val) => {
     setFromLong(val);
     console.log(val);
-  }
+  };
 
   const handleToLat = (val) => {
     setToLat(val);
     console.log(val);
-  }
+  };
 
   const handleToLong = (val) => {
     setToLong(val);
     console.log(val);
-  }
+  };
 
   if (loadError) return "Load error";
   if (!isLoaded) return "Loading";
@@ -69,10 +74,18 @@ export default function Map() {
   return (
     <div className="container w-full h-full" id="container">
       <div id="locationBoxFrom" className="locationBox">
-        <LocationSearch text="From" receiveLat={handleFromLat} receiveLong={handleFromLong} />
+        <LocationSearch
+          text="From"
+          receiveLat={handleFromLat}
+          receiveLong={handleFromLong}
+        />
       </div>
       <div id="locationBoxTo" className="locationBox">
-        <LocationSearch text={"To"} receiveLat={handleToLat} receiveLong={handleToLong} />
+        <LocationSearch
+          text={"To"}
+          receiveLat={handleToLat}
+          receiveLong={handleToLong}
+        />
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -91,23 +104,23 @@ export default function Map() {
         />
       </GoogleMap>
     </div>
-
-
   );
 }
-
 
 function MapDirectionsRenderer(props) {
   let [directions, setDirections] = useState();
   let [error, setError] = useState();
 
+  const { totalDistance, setTotalDistance, totalDuration, setTotalDuration } =
+    useContext(InfoContext);
+
   useEffect(() => {
     const { places, travelMode } = props;
 
-    const waypoints = places.map(p => ({
+    const waypoints = places.map((p) => ({
       location: { lat: p.latitude, lng: p.longitude },
-      stopover: true
-    }))
+      stopover: true,
+    }));
     const origin = waypoints.shift().location;
     const destination = waypoints.pop().location;
 
@@ -117,7 +130,7 @@ function MapDirectionsRenderer(props) {
         origin: origin,
         destination: destination,
         travelMode: travelMode,
-        waypoints: waypoints
+        waypoints: waypoints,
       },
       (result, status) => {
         if (status === window.google.maps.DirectionsStatus.OK) {
@@ -128,10 +141,13 @@ function MapDirectionsRenderer(props) {
           let legs = result.routes[0].legs;
 
           for (let i = 0; i < legs.length; i++) {
-            totalDistance += legs[i].distance.value;
-            totalDuration += legs[i].duration.value;
+            totalDistance += legs[i].distance.text;
+            totalDuration += legs[i].duration.text;
           }
 
+          // Set total distance in the context
+          setTotalDistance(totalDistance);
+          setTotalDuration(totalDuration);
         } else {
           setError(result);
         }
@@ -139,42 +155,50 @@ function MapDirectionsRenderer(props) {
     );
   });
 
-  return (
-    <DirectionsRenderer directions={directions} />
-  );
+  return <DirectionsRenderer directions={directions} />;
 }
 
 function LocationSearch(props) {
-  const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete();
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete();
 
   return (
     <div>
-      <Combobox onSelect={async (address) => {
-        try {
-          const results = await getGeocode({ address });
-          const { lat, lng } = await getLatLng(results[0]);
-          props.receiveLat(lat);
-          props.receiveLong(lng);
-          setValue(address);
-        } catch (error) {
-          console.log("error!");
-        }
-      }}>
-
-        <ComboboxInput value={value} onChange={(e) => {
-          setValue(e.target.value);
+      <Combobox
+        onSelect={async (address) => {
+          try {
+            const results = await getGeocode({ address });
+            const { lat, lng } = await getLatLng(results[0]);
+            props.receiveLat(lat);
+            props.receiveLong(lng);
+            setValue(address);
+          } catch (error) {
+            console.log("error!");
+          }
         }}
+      >
+        <ComboboxInput
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
           placeholder={props.text}
           disabled={!ready}
         />
         <ComboboxPopover>
           <ComboboxList>
-            {status === "OK" && data.map(({ id, description }) => (<ComboboxOption key={id} value={description} />))}
+            {status === "OK" &&
+              data.map(({ id, description }) => (
+                <ComboboxOption key={id} value={description} />
+              ))}
           </ComboboxList>
         </ComboboxPopover>
-
       </Combobox>
     </div>
-
   );
 }
