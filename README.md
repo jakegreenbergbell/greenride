@@ -1,4 +1,6 @@
-# Greenride
+# GreenRide
+
+There's nothing better than [trying GreenRide](https://jakegreenbergbell.github.io/greenride/) yourself!
 
 Hack on the Hill 2022.
 
@@ -49,3 +51,25 @@ https://stackoverflow.com/questions/3251609/how-to-get-total-driving-distance-wi
 https://stackoverflow.com/questions/54069253/usestate-set-method-not-reflecting-change-immediately
 
 - A lesson well learned on React state updates
+
+https://developers.google.com/maps/documentation/places/web-service/overview
+
+- Places API
+
+https://tailwindcss.com/
+
+- Tailwinds
+
+https://stackoverflow.com/questions/3251609/how-to-get-total-driving-distance-with-google-maps-api-v3
+
+- Helped us find relevant data structures for distance and duration calculations
+
+https://reactjs.org/docs/context.html
+
+- React Context Tutorial
+
+https://www.ucsusa.org/resources/car-emissions-global-warming#:~:text=Our%20personal%20vehicles%20are%20a,for%20every%20gallon%20of%20gas.
+
+- Global warming warning and its relations to personal transportation
+
+
