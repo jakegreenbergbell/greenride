@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/greenride/static/css/main.080b9e4c.css",
+    "main.js": "/greenride/static/js/main.d95ae76b.js",
+    "index.html": "/greenride/index.html",
+    "main.080b9e4c.css.map": "/greenride/static/css/main.080b9e4c.css.map",
+    "main.d95ae76b.js.map": "/greenride/static/js/main.d95ae76b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.080b9e4c.css",
+    "static/js/main.d95ae76b.js"
+  ]
+}
