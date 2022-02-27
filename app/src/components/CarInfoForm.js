@@ -235,7 +235,7 @@ function CarInfoForm() {
             ) / 100}{" "}
             kg CO2
           </div>
-          <div className="my-2 mt-20 text-xl text-green-600 font-semibold">
+          <div className="my-2 mt-10 text-xl text-green-600 font-semibold">
             <p className="text-center content-center m-auto">
               Emissions per passenger:{" "}
             </p>
@@ -253,6 +253,11 @@ function CarInfoForm() {
             <p className="text-center content-center m-auto">
               kg CO2
             </p>
+          </div>
+          <div className="flex-1 relative h-36">
+            <div className="text-sm absolute bottom-5">
+                    In order to stop climate change, experts suggest a maximum of 5kg emissions per day.
+            </div>
           </div>
         </div>
       </div>
