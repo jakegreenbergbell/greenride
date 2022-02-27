@@ -8,10 +8,10 @@ function App() {
     <InfoProvider>
       <div className="w-screen h-screen flex flex-row">
         <div className="flex flex-col flex-[1] bg-white justify-center items-center">
-          <div className="text-green-400 text-4xl">GreenRide</div>
+          <div className="text-green-600 text-5xl">GreenRide</div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-12 w-12 text-green-400"
+            className="h-12 w-12 text-green-600"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

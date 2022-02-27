@@ -235,16 +235,24 @@ function CarInfoForm() {
             ) / 100}{" "}
             kg CO2
           </div>
-          <div className="my-2 text-xl text-green-600 font-semibold">
-            Per passenger:{" "}
-            {parseInt(passengers)
-              ? Math.round(
-                  (parseInt(totalDistance.split(" ")[0]) * CO2PerMile) /
-                    parseInt(passengers) /
-                    10
-                ) / 100
-              : "N/A"}{" "}
-            kg CO2
+          <div className="my-2 mt-20 text-xl text-green-600 font-semibold">
+            <p className="text-center content-center m-auto">
+              Emissions per passenger:{" "}
+            </p>
+            <br />
+            <p className="text-center content-center m-auto text-7xl">
+              {parseInt(passengers)
+                ? Math.round(
+                    (parseInt(totalDistance.split(" ")[0]) * CO2PerMile) /
+                      parseInt(passengers) /
+                      10
+                  ) / 100
+                : "N/A"}{" "}
+            </p>
+            <br />
+            <p className="text-center content-center m-auto">
+              kg CO2
+            </p>
           </div>
         </div>
       </div>
