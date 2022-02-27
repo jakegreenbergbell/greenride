@@ -227,6 +227,7 @@ function CarInfoForm() {
           <div className="my-2">
             Total distance: {parseInt(totalDistance)} miles
           </div>
+          <div className="my-2">Total duration: {totalDuration}</div>
           <div className="my-2">
             Total emissions:{" "}
             {Math.round(
@@ -234,7 +235,7 @@ function CarInfoForm() {
             ) / 100}{" "}
             kg CO2
           </div>
-          <div className="my-2">
+          <div className="my-2 text-xl text-green-600 font-semibold">
             Per passenger:{" "}
             {parseInt(passengers)
               ? Math.round(
@@ -245,7 +246,6 @@ function CarInfoForm() {
               : "N/A"}{" "}
             kg CO2
           </div>
-          <div className="my-2">Total duration: {totalDuration}</div>
         </div>
       </div>
     </div>
