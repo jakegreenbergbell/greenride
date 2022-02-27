@@ -10,6 +10,7 @@ function CarInfoForm() {
   const [year, setYear] = useState("");
   const [availableYears, setAvailableYears] = useState([]);
   const [CO2PerMile, setCO2PerMile] = useState(-1);
+  const [passengers, setPassengers] = useState(1);
 
   const carMakeSet = new Set();
 
@@ -63,6 +64,12 @@ function CarInfoForm() {
   const changeYear = (e) => {
     const { value } = e.target;
     setYear(value);
+  };
+
+  // Change number of passengers
+  const changePassengers = (e) => {
+    const { value } = e.target;
+    setPassengers(value);
   };
 
   // Update list of available models for the selected car make
@@ -199,22 +206,45 @@ function CarInfoForm() {
           </select>
         </label>
         <br />
+        <label className="text-xs">
+          Number Passengers:
+          <br />
+          <input
+            className="bg-green-300 text-xl rounded-lg w-full p-1 border-none hover:bg-green-300"
+            value={passengers}
+            onChange={changePassengers}
+            type="text"
+          />
+        </label>
+        <br />
       </form>
       <div className="mt-4 w-full flex justify-center text-lg">
         <div className="flex-col">
-          <div>
-            Car's CO2 emissions: {Math.round(CO2PerMile / 10) / 100} kg CO2 per
-            mile
+          <div className="my-2">
+            {Math.round(CO2PerMile / 10) / 100} kg CO2 per mile
           </div>
-          <div>Total distance: {parseInt(totalDistance)} miles</div>
-          <div>
+          <div className="my-2">
+            Total distance: {parseInt(totalDistance)} miles
+          </div>
+          <div className="my-2">
             Total emissions:{" "}
             {Math.round(
               (parseInt(totalDistance.split(" ")[0]) * CO2PerMile) / 10
             ) / 100}{" "}
-            kg of CO2
+            kg CO2
           </div>
-          <div>Total duration: {totalDuration}</div>
+          <div className="my-2">
+            Per passenger:{" "}
+            {parseInt(passengers)
+              ? Math.round(
+                  (parseInt(totalDistance.split(" ")[0]) * CO2PerMile) /
+                    parseInt(passengers) /
+                    10
+                ) / 100
+              : "N/A"}{" "}
+            kg CO2
+          </div>
+          <div className="my-2">Total duration: {totalDuration}</div>
         </div>
       </div>
     </div>
